@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="handwriting.canvas.js"></script>
+    <script src="math.min.js"></script>
+    <script src="popup.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <title>Бобик Калькулятор</title>
+</head>
+<body>
+    <div class="calculator">
+        <div class="name">Бобик Калькулятор</div>
+        <div class="mode-toggle">
+            <button id="paws-mode" class="active">Лапы 🐾</button>
+            <button id="nose-mode">Нос 🐶</button>
+            <button id="teeth-mode">Зубы 🦷
+                <span class="beta-badge">Beta</span>
+            </button>
+            <button id="binary-mode">Хвост 🔢
+                <span class="beta-badge">Beta</span>
+            </button> <!-- Новый режим "Бинарный" -->
+            <button id="ai-mode">BarkGPT Maths
+                <span class="beta-badge">Beta</span>
+            </button>
+        </div>
+        <div class="paws-mode">
+            <input type="text" class="display" id="display" disabled>
+            <div class="buttons">
+                <button class="clear" id="clear-display">C</button>
+                <button class="operation" id="backspace">←</button>
+                <button class="operation" id="toggle-sign">+/-</button>
+                <button class="operation" id="append-colon">:</button>
+                <button class="digit" id="append-7">7</button>
+                <button class="digit" id="append-8">8</button>
+                <button class="digit" id="append-9">9</button>
+                <button class="operation" id="append-x">x</button>
+                <button class="digit" id="append-4">4</button>
+                <button class="digit" id="append-5">5</button>
+                <button class="digit" id="append-6">6</button>
+                <button class="operation" id="append-minus">-</button>
+                <button class="digit" id="append-1">1</button>
+                <button class="digit" id="append-2">2</button>
+                <button class="digit" id="append-3">3</button>
+                <button class="operation" id="append-plus">+</button>
+                <button class="digit" id="append-0">0</button>
+                <button class="digit" id="append-00">00</button>
+                <button class="digit" id="append-comma">,</button>
+                <button class="operation" id="calculate">=</button>
+                <button class="operation" id="calculate-sqrt">√</button>
+                <button class="operation" id="calculate-percent">%</button>
+                <button class="operation" id="append-pi">π</button>
+            </div>
+        </div>
+        <div class="nose-mode">
+            <canvas id="canvas" width="280" height="280" style="border: 2px solid; cursor: crosshair;"></canvas>
+            <button id="erase-canvas">Очистить</button>
+            <button id="recognize-canvas">Распознать</button>
+            <button id="calculate-recognized">Вычислить</button>
+            <div class="result-container">
+                <div id="recognition-result"></div>
+                <div id="calculation-result"></div>
+            </div>
+        </div>
+        <div class="teeth-mode" style="display: none;">
+            <input type="text" class="display" id="teeth-display" disabled>
+            <div class="buttons">
+                <button class="clear" id="clear-teeth-display">C</button>
+                <button class="operation" id="backspace-teeth">←</button>
+                <button class="operation" id="toggle-teeth-sign">+/-</button>
+                <button class="operation" id="append-teeth-pi">π</button>                
+                <button class="digit" id="append-teeth-7">7</button>
+                <button class="digit" id="append-teeth-8">8</button>
+                <button class="digit" id="append-teeth-9">9</button>
+                <button class="operation" id="append-teeth-colon">:</button>
+                <button class="digit" id="append-teeth-4">4</button>
+                <button class="digit" id="append-teeth-5">5</button>
+                <button class="digit" id="append-teeth-6">6</button>
+                <button class="operation" id="append-teeth-x">x</button>
+                <button class="digit" id="append-teeth-1">1</button>
+                <button class="digit" id="append-teeth-2">2</button>
+                <button class="digit" id="append-teeth-3">3</button>
+                <button class="operation" id="append-teeth-minus">-</button>
+                <button class="digit" id="append-teeth-0">0</button>
+                <button class="digit" id="append-teeth-00">00</button>
+                <button class="digit" id="append-teeth-comma">,</button>
+                <button class="operation" id="append-teeth-plus">+</button>
+                <button class="operation" id="append-teeth-and">AND (&)</button>
+                <button class="operation" id="append-teeth-or">OR (|)</button>
+                <button class="operation" id="append-teeth-xor">XOR (^)</button>
+                <button class="operation" id="append-teeth-not">NOT (~)</button>
+                <button class="operation" id="calculate-square">x²</button>
+                <button class="operation" id="calculate-cube">x³</button>
+                <button class="operation" id="calculate-teeth-sqrt">√</button>
+                <button class="operation" id="calculate-teeth">=</button>
+            </div>
+        </div>
+        <div class="binary-mode" style="display: none;">
+            <input type="text" class="display" id="binary-display" disabled>
+            <div class="buttons">
+                <button class="clear" id="clear-binary-display">C</button>
+                <button class="operation" id="backspace-binary">←</button>
+                <button class="operation" id="toggle-binary-sign">+/-</button>
+                <button class="operation" id="append-binary-plus">+</button>
+                <button class="digit" id="append-binary-1">1</button>
+                <button class="digit" id="append-binary-0">0</button>
+                <button class="digit" id="append-binary-00">00</button>
+                <button class="operation" id="append-binary-minus">-</button>
+                <button class="operation" id="append-binary-multiply">*</button>
+                <button class="operation" id="append-binary-divide">/</button>
+                <button class="operation" id="calculate-binary">=</button>
+            </div>
+            <div class="result-container">
+                <div id="binary-result"></div>
+            </div>
+        </div>
+        <div class="ai-mode" style="display: none;">
+            <div class="chat-container">
+                <input type="text" id="chat-input" placeholder="Введите ваш запрос">
+                <button id="send-message">Отправить</button>
+                <div class="chat-messages" id="chat-messages"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

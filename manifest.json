@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Бобик Калькулятор",
+  "version": "2.0",
+  "description": "Калькулятор с разными режимами: Лапы, Нос, Зубы и Бинарный.",
+  "author": "Gulya TV (Maxim)",
+  "permissions": [
+    "storage"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon1024.png",
+      "48": "icons/icon1024.png",
+      "128": "icons/icon1024.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon1024.png",
+    "48": "icons/icon1024.png",
+    "128": "icons/icon1024.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "bobik@gulyatv.org",
+      "strict_min_version": "58.0"
+    }
+  }
+}
